@@ -15,6 +15,12 @@ html, body {
 	box-sizing: border-box;
 }
 
+input, button {
+  &:focus {
+    outline: none;
+  }
+}
+
 #app {
 	height: 100%;
 }

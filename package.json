@@ -19,13 +19,18 @@
   "devDependencies": {
     "eslint": "^4.5.0",
     "eslint-config-synacor": "^1.1.0",
+    "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-react": "^7.3.0",
     "if-env": "^1.0.0",
     "preact-cli": "^1.4.1"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
+    "node-sass": "^4.5.3",
     "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
-    "preact-router": "^2.5.7"
+    "preact-router": "^2.5.7",
+    "proptypes": "^1.1.0",
+    "sass-loader": "^6.0.6"
   }
 }

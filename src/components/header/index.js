@@ -1,18 +1,17 @@
-import { h, Component } from 'preact';
-import { Link } from 'preact-router/match';
-import style from './style';
+import {h} from 'preact'
+import style from './style'
+import classnames from 'classnames'
+import PropTypes from 'proptypes'
 
-export default class Header extends Component {
-	render() {
-		return (
-			<header class={style.header}>
-				<h1>Preact App</h1>
-				<nav>
-					<Link activeClassName={style.active} href="/">Home</Link>
-					<Link activeClassName={style.active} href="/profile">Me</Link>
-					<Link activeClassName={style.active} href="/profile/john">John</Link>
-				</nav>
-			</header>
-		);
-	}
+
+const Header = ({busy}) => (
+  <header className={classnames(style.header, {[style.loading]: busy})}>
+    <h1>GitHub Mini Client</h1>
+  </header>
+)
+
+Header.propTypes = {
+  busy: PropTypes.bool
 }
+
+export default Header

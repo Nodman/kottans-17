@@ -1,12 +1,4 @@
-.idea/
 build
-.vscode
 node_modules
 **/.DS_Store
-stats.json
-coverage
 npm-debug.log
-package-lock.json
-yarn.lock
-e2e/reports
-coverage

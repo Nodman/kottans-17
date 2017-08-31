@@ -17,19 +17,12 @@
     "react",
     "babel"
   ],
-  "parser": "babel-eslint",
   "globals": {
-    "_": false,
-    "$": false,
-    "React": false,
-    "PropTypes": false,
-    "Aviary": false,
-    "FB": false,
-    "__DEV__": false,
-    "__PROD__": false,
-    "google": false
+    "React": false
   },
+  "parser": "babel-eslint",
   "rules": {
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^h$" }],
     "no-underscore-dangle": 0,
     "generator-star-spacing": 0,
     "quotes":[1, "single"],
