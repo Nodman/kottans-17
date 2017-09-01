@@ -1,17 +1,13 @@
 import {h, Component} from 'preact'
 import {Router} from 'preact-router'
 import Header from './header'
-import request from '../utils/request'
+import {get} from '../utils/request'
 import Home from './home'
-// import Profile from '../routes/profile'
-// import Home from 'async!./home'
-// import Profile from 'async!./profile'
+import {parseGHLink} from '../utils/url-util'
 
 export default class App extends Component {
   state = {
     busy: false,
-    currentPage: 0,
-    pagesTotal: 0,
     name: ''
   }
 
@@ -22,17 +18,20 @@ export default class App extends Component {
   }
 
   fetchRepos = async(name) => {
+    const {name: currentName, links: _links} = this.state
+    const isSameUser = name === currentName
+    const reposURL = _links && _links.next
+      ? _links.next.link
+      : `https://api.github.com/users/${name}/repos`
     this.setState({busy: true})
-    const {name: currentName, currentPage} = this.state
     try {
-      const {body, headers} = await request.get(`https://api.github.com/users/${name}/repos`)
-      console.log(headers)
-      this.reposData = name === currentName ? [...this.reposData, ...body] : body
-      this.setState({busy: false, currentPage: currentPage + 1, name})
-      return body
+      const {body, headers: {Link}} = await get(reposURL)
+      const links = Link ? parseGHLink(Link) : null
+      this.reposData = isSameUser ? [...this.reposData, ...body] : body
+      this.setState({busy: false, name, links})
     } catch (error) {
+      console.info(error)
       this.setState({busy: false, error})
-      return error
     }
   }
 

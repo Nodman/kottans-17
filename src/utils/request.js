@@ -23,7 +23,5 @@ const checkStatus = response => {
 
 const request = (uri, options) => fetch(uri, options).then(checkStatus)
 
-request.get = uri =>
+export const get = uri =>
   request(uri, {method: 'GET', headers: {'Accept': 'application/vnd.github.mercy-preview+json'}})
-
-export default request
