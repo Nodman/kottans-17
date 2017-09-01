@@ -6,7 +6,8 @@ import classnames from 'classnames'
 
 class SearchForm extends Component {
   static propTypes = {
-    formHandler: PropTypes.func.isRequired
+    formHandler: PropTypes.func.isRequired,
+    name: PropTypes.string
   }
 
   state = {
@@ -27,6 +28,10 @@ class SearchForm extends Component {
   handleInputFocus = () => this.setState({alert: false})
 
   handleInputChange = ({target: {value}}) => this.setState({value, alert: false})
+
+  componentDidMount() {
+    this.setState({value: this.props.name})
+  }
 
   render({busy}, {alert, value}) {
     return (

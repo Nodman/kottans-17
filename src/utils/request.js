@@ -1,8 +1,14 @@
 const parseResponse = response => {
   const contentType = response.headers.get('content-type')
-  return contentType && contentType.includes('application/json')
+  const body = contentType && contentType.includes('application/json')
     ? response.json()
     : response.text()
+  return {
+    body,
+    headers: {
+      Link: response.headers.get('Link')
+    }
+  }
 }
 
 
