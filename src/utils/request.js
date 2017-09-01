@@ -3,12 +3,12 @@ const parseResponse = response => {
   const body = contentType && contentType.includes('application/json')
     ? response.json()
     : response.text()
-  return {
-    body,
+  return body.then(data => ({
+    body: data,
     headers: {
       Link: response.headers.get('Link')
     }
-  }
+  }))
 }
 
 
