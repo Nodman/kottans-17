@@ -1,8 +1,7 @@
 import {h, Component} from 'preact'
-import {route} from 'preact-router'
-import SearchForm from '../search-form'
 import PropTypes from 'proptypes'
 import style from './style.scss'
+import CardsList from '../cards-list'
 
 export default class Home extends Component {
   static propTypes = {
@@ -11,22 +10,11 @@ export default class Home extends Component {
     fetchRepos: PropTypes.func
   }
 
-  formHandler = name => {
-    if (this.props.busy) {
-      return
-    }
-    route(`/${name}`)
-  }
 
-  render({busy, name}) {
+  render({busy, name, reposData}) {
     return (
-      <div>
-        <SearchForm
-          formHandler={this.formHandler}
-          busy={busy}
-          name={name}/>
-        <div className={style.contentWrapper}>
-        </div>
+      <div className={style.contentWrapper}>
+        <CardsList reposData={reposData}/>
       </div>
     )
   }

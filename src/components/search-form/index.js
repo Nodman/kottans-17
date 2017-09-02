@@ -29,8 +29,8 @@ class SearchForm extends Component {
 
   handleInputChange = ({target: {value}}) => this.setState({value, alert: false})
 
-  componentDidMount() {
-    this.setState({value: this.props.name})
+  componentWillReceiveProps(nextProps) {
+    this.setState({value: nextProps.name})
   }
 
   render({busy}, {alert, value}) {

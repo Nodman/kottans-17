@@ -22,6 +22,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
+    "camelcase": 0,
     "array-element-newline": 0,
     "no-unused-vars": ["error", { "varsIgnorePattern": "^h$" }],
     "no-underscore-dangle": 0,
