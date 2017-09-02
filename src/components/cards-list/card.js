@@ -3,6 +3,7 @@ import style from './style'
 import {parseDate} from '../../utils/date'
 import PropTypes from 'proptypes'
 import classnames from 'classnames'
+import {floorStars} from '../../utils/number'
 
 const Card = ({fork, name, description, stargazers_count, url, language, updated_at}) => (
   <div className={style.card}>
@@ -17,7 +18,7 @@ const Card = ({fork, name, description, stargazers_count, url, language, updated
       <span className={classnames(style.item, style.langIcon)}>{language}</span>
       {stargazers_count
         ? <span className={classnames(style.item, style.starIcon)}>
-            {stargazers_count}
+            {floorStars(stargazers_count)}
           </span>
         : null
       }
