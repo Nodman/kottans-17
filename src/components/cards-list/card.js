@@ -2,17 +2,28 @@ import {h} from 'preact'
 import style from './style'
 import {parseDate} from '../../utils/date'
 import PropTypes from 'proptypes'
+import classnames from 'classnames'
 
 const Card = ({fork, name, description, stargazers_count, url, language, updated_at}) => (
   <div className={style.card}>
-    <h3>{`${fork ? '[FORK]' : ''} ${name}`}</h3>
-    <div>
-      <span className="description">{description}</span>
+    <div className={style.heading}>
+      <h3>{name}</h3>
+      <h5>{`${fork ? '[FORK]' : ''}`}</h5>
     </div>
-    <div className="infoWrapper">
-      <span className="language">{language}</span>
-      {stargazers_count ? <span className="starsCount">{stargazers_count}</span> : null}
-      <span className="update">Last updated {parseDate(updated_at)}</span>
+    <div className={style.description}>
+      {description}
+    </div>
+    <div className={style.infoWrapper}>
+      <span className={classnames(style.item, style.langIcon)}>{language}</span>
+      {stargazers_count
+        ? <span className={classnames(style.item, style.starIcon)}>
+            {stargazers_count}
+          </span>
+        : null
+      }
+      <span className={classnames(style.item, style.updateIcon)}>
+        updated {parseDate(updated_at)}
+      </span>
     </div>
   </div>
 )

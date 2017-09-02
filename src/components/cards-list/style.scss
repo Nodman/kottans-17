@@ -1,4 +1,67 @@
 .card {
   width: 100%;
-  border-top: 1px solid #3A67B7;
+  border-top: 1px solid rgba(58, 103, 183, 0.4);
+  padding-bottom: 20px;
+  color: #696767;
+  .heading {
+    display: flex;
+    h3, h5 {
+      margin-bottom: 5px;
+    }
+    h3 {
+      cursor: pointer;
+      color: #3a67b7;
+    }
+    justify-content: space-between;
+  }
+  .description {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .infoWrapper {
+    display: flex;
+    margin-top: 15px;
+    font-size: 12px;
+    .item {
+      padding-right: 15px;
+      &:before {
+        content: ' ';
+        height: 14px;
+        width: 14px;
+        background-size: 14px 14px;
+        background-position: center;
+        padding: 0 10px;
+        background-repeat: no-repeat;
+      }
+      &.langIcon {
+        &:before {
+          background-image: url('./img/lang.svg')
+        }
+      }
+      &.updateIcon {
+        &:before {
+          background-image: url('./img/update.svg')
+        }
+      }
+      &.starIcon {
+        &:before {
+          background-image: url('./img/star.svg')
+        }
+      }
+    }
+  }
+}
+
+.loader {
+  text-align: center;
+}
+
+
+.scrollArea {
+  margin-left: 30px;
+  padding-right: 20px;
+  flex-grow: 1;
+  overflow-y: scroll;
 }

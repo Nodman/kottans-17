@@ -9,7 +9,8 @@ import {parseGHLink} from '../utils/url-util'
 export default class App extends Component {
   state = {
     busy: false,
-    name: ''
+    name: '',
+    links: {}
   }
 
   reposData = []
@@ -20,14 +21,14 @@ export default class App extends Component {
   }
 
   fetchRepos = async(name) => {
-    const {links: _links = {}, name: _name} = this.state
+    const {links: _links, name: _name} = this.state
     const reposURL = !name && _links.next
       ? _links.next.link
       : `https://api.github.com/users/${name}/repos`
     this.setState({busy: true, name: name || _name})
     try {
       const {body, headers: {Link}} = await get(reposURL)
-      const links = Link ? parseGHLink(Link) : null
+      const links = Link ? parseGHLink(Link) : {}
       this.reposData = name ? body : [...this.reposData, ...body]
       this.setState({busy: false, links})
     } catch (error) {
@@ -44,7 +45,7 @@ export default class App extends Component {
   }
 
   render() {
-    const {busy, name} = this.state
+    const {busy, name, links} = this.state
     return (
       <div id="app">
         <Header busy={busy}/>
@@ -55,6 +56,7 @@ export default class App extends Component {
         <Router onChange={this.handleRouteChange}>
           <Home
             path="/:name?"
+            links={links}
             fetchRepos={this.fetchRepos}
             busy={busy}
             reposData={this.reposData}/>

@@ -13,10 +13,9 @@
     border: 1px solid #3A67B7;
     align-items: center;
     position: relative;
-    flex-grow: 3;
     overflow: hidden;
     padding: 0 10px;
-    max-width: 300px;
+    width: 250px;
     background: #fff;
     display: flex;
     &.alert {
