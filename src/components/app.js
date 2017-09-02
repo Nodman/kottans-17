@@ -2,7 +2,7 @@ import {h, Component} from 'preact'
 import {Router, route} from 'preact-router'
 import Header from './header'
 import {get} from '../utils/request'
-import Home from './home'
+import CardsList from './cards-list'
 import SearchForm from './search-form'
 import {parseGHLink} from '../utils/url-util'
 
@@ -37,8 +37,9 @@ export default class App extends Component {
     }
   }
 
-  formHandler = name => {
-    if (this.state.busy || name === this.state.name) {
+  formHandler = value => {
+    const {busy, name, error} = this.state
+    if (busy || value === name && error) {
       return
     }
     route(`/${name}`)
@@ -54,7 +55,7 @@ export default class App extends Component {
           busy={busy}
           name={name}/>
         <Router onChange={this.handleRouteChange}>
-          <Home
+          <CardsList
             path="/:name?"
             links={links}
             fetchRepos={this.fetchRepos}

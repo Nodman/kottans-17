@@ -65,3 +65,14 @@
   flex-grow: 1;
   overflow-y: scroll;
 }
+
+
+.contentWrapper {
+  margin: 20px 0px 20px 20px;
+  display: flex;
+  .settingsPanel {
+    min-width: 250px;
+    max-width: 250px;
+    flex-grow: 1;
+  }
+}

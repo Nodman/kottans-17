@@ -34,9 +34,12 @@ class CardsList extends Component {
 
   render({reposData, busy}) {
     return (
-      <div className={style.scrollArea} ref={ref => (this.scrollAreaNode = ref)}>
-        {reposData.map(repo => <Card key={repo.id} {...repo}/>)}
-        {busy && <div className={style.loader}>Fetching page...</div>}
+      <div className={style.contentWrapper}>
+        <div className={style.settingsPanel}/>
+        <div className={style.scrollArea} ref={ref => (this.scrollAreaNode = ref)}>
+          {reposData.map(repo => <Card key={repo.id} {...repo}/>)}
+          {busy && <div className={style.loader}>Fetching page...</div>}
+        </div>
       </div>
     )
   }
