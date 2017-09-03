@@ -16,9 +16,11 @@ const checkStatus = response => {
   const parsedResponse = parseResponse(response)
   if (response.status >= 200 && response.status < 300) {
     return parsedResponse
+  } else if (response.status === 404) {
+    return Promise.resolve([])
   }
 
-  return Promise.reject(parsedResponse)
+  return parsedResponse.then(error => Promise.reject(error))
 }
 
 const request = (uri, options) => fetch(uri, options).then(checkStatus)

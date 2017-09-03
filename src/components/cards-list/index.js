@@ -1,7 +1,6 @@
 import {h, Component} from 'preact'
 import style from './style'
 import PropTypes from 'proptypes'
-import classnames from 'classnames'
 import Card from './card'
 
 
@@ -10,7 +9,8 @@ class CardsList extends Component {
     busy: PropTypes.bool,
     links: PropTypes.object,
     reposData: PropTypes.array,
-    fetchRepos: PropTypes.func
+    fetchRepos: PropTypes.func,
+    name: PropTypes.string
   }
 
   handleScroll = ({target: {scrollTop, scrollHeight, offsetHeight}}) => {
@@ -32,12 +32,14 @@ class CardsList extends Component {
   }
 
 
-  render({reposData, busy}) {
+  render({reposData, busy, name}) {
     return (
       <div className={style.contentWrapper}>
         <div className={style.settingsPanel}/>
         <div className={style.scrollArea} ref={ref => (this.scrollAreaNode = ref)}>
-          {reposData.map(repo => <Card key={repo.id} {...repo}/>)}
+          {name && !busy && !reposData.length
+            ? <div className={style.loader}>Nothing found</div>
+            : reposData.map(repo => <Card key={repo.id} {...repo}/>)}
           {busy && <div className={style.loader}>Fetching page...</div>}
         </div>
       </div>
