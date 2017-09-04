@@ -15,8 +15,7 @@ export default class App extends Component {
   state = {
     busy: false,
     name: '',
-    links: {},
-    dialog: null
+    links: {}
   }
 
   reposData = []
@@ -55,7 +54,8 @@ export default class App extends Component {
     route(`/${value}`)
   }
 
-  openRepoDialog = repoURL => this.setState({dialog: {repoURL}})
+  openRepoDialog = repo => this.setState({dialog: {repo}})
+  openErrorDialog = error => this.setState({dialog: null, error})
   closeRepoDialog = () => this.setState({dialog: null})
   closeErrorDialog = () => this.setState({error: null})
 
@@ -65,7 +65,10 @@ export default class App extends Component {
       <div id="app">
         <Header busy={busy}/>
         {error && <ErrorDialog handleClose={this.closeErrorDialog}/>}
-        {dialog && <RepoDialog handleClose={this.closeRepoDialog}/>}
+        {dialog && <RepoDialog
+                     openErrorDialog={this.openErrorDialog}
+                     handleClose={this.closeRepoDialog}
+                     repo={dialog.repo}/>}
         <SearchForm
           formHandler={this.formHandler}
           busy={busy}
@@ -74,6 +77,9 @@ export default class App extends Component {
           <CardsList
             path="/:name?"
             links={links}
+            error={error}
+            openErrorDialog={this.openErrorDialog}
+            openRepoDialog={this.openRepoDialog}
             fetchRepos={this.fetchRepos}
             busy={busy}
             reposData={this.reposData}/>

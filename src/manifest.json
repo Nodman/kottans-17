@@ -1,6 +1,6 @@
 {
-  "name": "Preact PWA",
-  "short_name": "Preact PWA",
+  "name": "gitHub Mini Client",
+  "short_name": "gitHub Mini Client",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait"

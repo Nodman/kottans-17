@@ -1,0 +1,15 @@
+{
+  "presets": [
+      "es2015",
+      "stage-0"
+  ],
+  "plugins": [
+    "transform-regenerator",
+    ["transform-react-jsx", {"pragma": "h"}],
+    ["transform-runtime", {
+      "helpers": false,
+      "polyfill": false,
+      "regenerator": true
+    }]
+  ]
+}

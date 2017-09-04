@@ -10,17 +10,18 @@ class CardsList extends Component {
     links: PropTypes.object,
     reposData: PropTypes.array,
     fetchRepos: PropTypes.func,
+    error: PropTypes.object,
     name: PropTypes.string
   }
 
   handleScroll = ({target: {scrollTop, scrollHeight, offsetHeight}}) => {
-    const {links, busy, fetchRepos} = this.props
+    const {links, busy, fetchRepos, error} = this.props
     if (!links.next || busy) {
       return
     }
     const scrollValue = scrollTop + offsetHeight
     const scrollDelta = scrollHeight - scrollValue
-    scrollDelta < 400 && fetchRepos()
+    scrollDelta < 400 && !error && fetchRepos()
   }
 
   componentDidMount() {
@@ -32,14 +33,14 @@ class CardsList extends Component {
   }
 
 
-  render({reposData, busy, name}) {
+  render({reposData, busy, name, openRepoDialog}) {
     return (
       <div className={style.contentWrapper}>
         <div className={style.settingsPanel}/>
         <div className={style.scrollArea} ref={ref => (this.scrollAreaNode = ref)}>
           {name && !busy && !reposData.length
             ? <div className={style.loader}>Nothing found</div>
-            : reposData.map(repo => <Card key={repo.id} {...repo}/>)}
+            : reposData.map(repo => <Card key={repo.id} repo={repo} openRepoDialog={openRepoDialog}/>)}
           {busy && <div className={style.loader}>Fetching page...</div>}
         </div>
       </div>
