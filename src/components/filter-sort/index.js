@@ -16,11 +16,8 @@ class FilterSort extends Component {
 
   applyToRouter = type => {
     const query = parseQuery(location.search)
-    // console.log(query);
     query[type] = this.state[type]
-    // console.log(query);
     const newQuery = composeQuery(query)
-    // console.log(newQuery);
     this.updateQueryRoute(newQuery)
   }
 
@@ -39,7 +36,10 @@ class FilterSort extends Component {
     this.setState({type: event.target.value}, () => this.applyToRouter('type'))
 
   handleChangeSort = event => this.setState({sort: event.target.value}, () => this.applyToRouter('sort'))
-  handleChangeOrder = event => this.setState({order: event.target.value}, () => this.applyToRouter('order'))
+  handleChangeOrder = event => this.setState({order: event.target.value}, () => {
+    this.applyToRouter('order')
+    !this.state.sort && this.handleChangeSort({target: {value: 'name'}})
+  })
 
   componentDidMount() {
     const query = parseQuery(location.search)
