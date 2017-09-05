@@ -25,6 +25,23 @@ input:focus, button:focus {
 #contentWrapper {
   margin: 20px 0px 20px 20px;
   display: flex; }
+._2_TdBsXMPfqihrfGipU8OP {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; }
+  ._2_TdBsXMPfqihrfGipU8OP ._3Tcvp6XEphau_bYrc8gtFk input {
+    margin-right: 25px; }
+  ._2_TdBsXMPfqihrfGipU8OP .ZVHov_xRApknJhHbV-YhG {
+    height: 30px;
+    display: flex;
+    align-items: center; }
+    ._2_TdBsXMPfqihrfGipU8OP .ZVHov_xRApknJhHbV-YhG label {
+      width: 130px;
+      display: block; }
+    ._2_TdBsXMPfqihrfGipU8OP .ZVHov_xRApknJhHbV-YhG ._2M6wE_PdS6nTb1ehNe8ffy {
+      height: 25px;
+      width: 120px; }
+
 ._2lWbD5N9ClEorgIe-yARPe {
   min-width: 250px;
   max-width: 250px;
