@@ -4,7 +4,7 @@ import style from './style'
 import PropTypes from 'proptypes'
 import {parseQuery, composeQuery} from '../../utils/url-util'
 
-class Filters extends Component {
+class FilterSort extends Component {
   state = {
     has_open_issues: false,
     has_topics: false,
@@ -14,7 +14,7 @@ class Filters extends Component {
 
   updateQueryRoute = query => route(`${location.pathname}?${query}`.replace(/\?$/, ''))
 
-  applyFilterToRouter = type => {
+  applyToRouter = type => {
     const query = parseQuery(location.search)
     // console.log(query);
     query[type] = this.state[type]
@@ -25,18 +25,21 @@ class Filters extends Component {
   }
 
   handleCheckBoxChange = (event, type) => {
-    this.setState({[type]: event.target.checked}, () => this.applyFilterToRouter(type))
+    this.setState({[type]: event.target.checked}, () => this.applyToRouter(type))
   }
 
   handleStarsInputChange = event => this.setState({stars: event.target.value})
-  handleStarsInputBlur = () => this.applyFilterToRouter('starred_gt')
+  handleStarsInputBlur = () => this.applyToRouter('starred_gt')
 
   handleChangeDate = event =>
-    this.setState({updated_at: event.target.value}, () => this.applyFilterToRouter('updated_at'))
+    this.setState({updated_at: event.target.value}, () => this.applyToRouter('updated_at'))
   handleChangeLanguage = event =>
-    this.setState({language: event.target.value}, () => this.applyFilterToRouter('language'))
+    this.setState({language: event.target.value}, () => this.applyToRouter('language'))
   handleChangeType = event =>
-    this.setState({type: event.target.value}, () => this.applyFilterToRouter('type'))
+    this.setState({type: event.target.value}, () => this.applyToRouter('type'))
+
+  handleChangeSort = event => this.setState({sort: event.target.value}, () => this.applyToRouter('sort'))
+  handleChangeOrder = event => this.setState({order: event.target.value}, () => this.applyToRouter('order'))
 
   componentDidMount() {
     const query = parseQuery(location.search)
@@ -44,7 +47,7 @@ class Filters extends Component {
   }
 
 
-  render({languages}, {has_open_issues, has_topics, starred_gt, date, language, type}) {
+  render({languages}, {has_open_issues, has_topics, starred_gt, date, language, type, sort, order}) {
     return (
       <div className={style.settingsPanel}>
         <div className={style.filtersWrapper}>
@@ -85,7 +88,7 @@ class Filters extends Component {
           <div>
             <label htmlFor="language">Language</label>
             <select id="language" onChange={this.handleChangeLanguage}>
-              <option value={false} selected>all</option>
+              <option value="all" selected>All</option>
               {languages.map(lang => <option selected={language === lang} key={lang} value={lang}>{lang}</option>)}
             </select>
           </div>
@@ -115,16 +118,32 @@ class Filters extends Component {
               value="source"
               checked={type === 'source'}/>
           </div>
+          <div>
+            <label htmlFor="sort">Sort by</label>
+            <select id="sort" onChange={this.handleChangeSort}>
+              <option value="name" selected={sort === 'name'}>Name</option>
+              <option value="stargazers_count" selected={sort === 'stargazers_count'}>Stars</option>
+              <option value="open_issues_count" selected={sort === 'open_issues_count'}>Issues</option>
+              <option value="updated_at" selected={sort === 'updated_at'}>Updated</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="order">Order</label>
+            <select id="order" onChange={this.handleChangeOrder}>
+              <option value="asc" selected={order === 'asc'}>asc</option>
+              <option value="desc" selected={order === 'desc'}>desc</option>
+            </select>
+          </div>
         </div>
       </div>
     )
   }
 }
 
-Filters.propTypes = {
+FilterSort.propTypes = {
   busy: PropTypes.bool,
   handleClose: PropTypes.func
 }
 
 
-export default Filters
+export default FilterSort
