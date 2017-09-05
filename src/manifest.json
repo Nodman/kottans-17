@@ -1,6 +1,6 @@
 {
-  "name": "Preact PWA",
-  "short_name": "Preact PWA",
+  "name": "GH Mini CLient",
+  "short_name": "GH Mini Client",
   "start_url": "./",
   "display": "standalone",
   "orientation": "portrait",
