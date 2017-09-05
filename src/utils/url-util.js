@@ -1,8 +1,32 @@
-export const parseQuery = query => query.reduce((acc, item) => {
-  const [key, value] = item.replace(/"/g, '').split('=')
-  acc[key] = value || null
-  return acc
-}, {})
+export const parseQuery = query => {
+  const _q = query instanceof Array ? query : query.slice(1).split('&')
+  return _q.reduce((acc, item) => {
+    const [key, value] = item.replace(/"/g, '').split('=')
+    if (!key.trim()) {
+      return acc
+    }
+    acc[key] = value || true
+    return acc
+  }, {})
+}
+
+export const composeQuery = queryObj => {
+  const res = Object.keys(queryObj).reduce((acc, key) => {
+    if (!key.trim()) {
+      return acc
+    }
+    const value = queryObj[key]
+    let pair = ''
+    if (typeof (value) === 'boolean') {
+      pair = value ? key : pair
+    } else {
+      pair = value ? `${key}=${value}` : ''
+    }
+    return [...acc, pair].filter(str => str)
+  }, []).join('&')
+
+  return res
+}
 
 export const parseGHLink = link => {
   const items = link.split(',')
@@ -17,6 +41,6 @@ export const parseGHLink = link => {
 
 export const parseURL = url => {
   const {search, ..._url} = new URL(url)
-  const query = parseQuery(search.slice(1).split('&'))
+  const query = parseQuery(search)
   return {..._url, query}
 }

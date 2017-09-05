@@ -33,16 +33,13 @@ class CardsList extends Component {
   }
 
 
-  render({reposData, busy, name, openRepoDialog}) {
+  render({reposData = [], busy, name, openRepoDialog}) {
     return (
-      <div className={style.contentWrapper}>
-        <div className={style.settingsPanel}/>
-        <div className={style.scrollArea} ref={ref => (this.scrollAreaNode = ref)}>
-          {name && !busy && !reposData.length
-            ? <div className={style.loader}>Nothing found</div>
-            : reposData.map(repo => <Card key={repo.id} repo={repo} openRepoDialog={openRepoDialog}/>)}
-          {busy && <div className={style.loader}>Fetching page...</div>}
-        </div>
+      <div className={style.scrollArea} ref={ref => (this.scrollAreaNode = ref)}>
+        {name && !busy && !reposData.length
+          ? <div className={style.loader}>Nothing found</div>
+          : reposData.map(repo => <Card key={repo.id} repo={repo} openRepoDialog={openRepoDialog}/>)}
+        {busy && <div className={style.loader}>Fetching page...</div>}
       </div>
     )
   }
