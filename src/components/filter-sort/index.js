@@ -28,7 +28,7 @@ class FilterSort extends Component {
     this.setState({[type]: event.target.checked}, () => this.applyToRouter(type))
   }
 
-  handleStarsInputChange = event => this.setState({stars: event.target.value})
+  handleStarsInputChange = event => this.setState({starred_gt: event.target.value})
   handleStarsInputBlur = () => this.applyToRouter('starred_gt')
 
   handleChangeDate = event =>
