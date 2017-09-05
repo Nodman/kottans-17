@@ -14,7 +14,7 @@ import {yeap, filtersActions, applySort, getLanguages} from '../utils/helpers'
 const ErrorDialog = Dialog('error')
 const RepoDialog = Dialog('repo')
 
-const PUBLIC_PATH = __DEV__ ? '/' : '/kottans-17'
+const PUBLIC_PATH = __DEV__ ? '/' : '/kottans-17/'
 
 
 export default class App extends Component {
