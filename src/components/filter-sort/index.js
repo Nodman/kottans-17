@@ -47,11 +47,12 @@ class FilterSort extends Component {
   }
 
 
-  render({languages}, {has_open_issues, has_topics, starred_gt, date, language, type, sort, order}) {
+  render({languages}, {has_open_issues, has_topics, starred_gt, updated_at, language, type, sort, order}) {
     return (
       <div className={style.settingsPanel}>
         <div className={style.filtersWrapper}>
-          <div>
+          <h3>Filter by:</h3>
+          <div className={style.filterItem}>
             <label htmlFor="hasOpenIssues">Has open issues</label>
             <input
               id="hasOpenIssues"
@@ -59,7 +60,7 @@ class FilterSort extends Component {
               onChange={event => this.handleCheckBoxChange(event, 'has_open_issues')}
               checked={has_open_issues}/>
           </div>
-          <div>
+          <div className={style.filterItem}>
             <label htmlFor="hasTopics">Has topics</label>
             <input
               id="hasTopics"
@@ -67,32 +68,33 @@ class FilterSort extends Component {
               onChange={event => this.handleCheckBoxChange(event, 'has_topics')}
               checked={has_topics}/>
           </div>
-          <div>
-            <label htmlFor="stars">Has more or equal </label>
+          <div className={style.filterItem}>
+            <label htmlFor="stars">Stars count</label>
             <input
               id="stars"
               type="text"
+              className={style.inputItem}
               onChange={this.handleStarsInputChange}
               onBlur={this.handleStarsInputBlur}
               value={starred_gt}/>
-            <label htmlFor="stars">stars</label>
           </div>
-          <div>
+          <div className={style.filterItem}>
             <label htmlFor="date">Updated after</label>
             <input
               id="date"
-              value={date}
+              className={style.inputItem}
+              value={updated_at}
               onChange={this.handleChangeDate}
               type="date"/>
           </div>
-          <div>
+          <div className={style.filterItem}>
             <label htmlFor="language">Language</label>
-            <select id="language" onChange={this.handleChangeLanguage}>
+            <select id="language" className={style.inputItem} onChange={this.handleChangeLanguage}>
               <option value="all" selected>All</option>
               {languages.map(lang => <option selected={language === lang} key={lang} value={lang}>{lang}</option>)}
             </select>
           </div>
-          <div>
+          <div className={style.filterItemRadio}>
             <label htmlFor="type_all">All</label>
             <input
               type="radio"
@@ -118,18 +120,19 @@ class FilterSort extends Component {
               value="source"
               checked={type === 'source'}/>
           </div>
-          <div>
-            <label htmlFor="sort">Sort by</label>
-            <select id="sort" onChange={this.handleChangeSort}>
+          <h3>Sort:</h3>
+          <div className={style.filterItem}>
+            <label htmlFor="sort">Criteria</label>
+            <select id="sort" className={style.inputItem} onChange={this.handleChangeSort}>
               <option value="name" selected={sort === 'name'}>Name</option>
               <option value="stargazers_count" selected={sort === 'stargazers_count'}>Stars</option>
               <option value="open_issues_count" selected={sort === 'open_issues_count'}>Issues</option>
               <option value="updated_at" selected={sort === 'updated_at'}>Updated</option>
             </select>
           </div>
-          <div>
+          <div className={style.filterItem}>
             <label htmlFor="order">Order</label>
-            <select id="order" onChange={this.handleChangeOrder}>
+            <select id="order" className={style.inputItem} onChange={this.handleChangeOrder}>
               <option value="asc" selected={order === 'asc'}>asc</option>
               <option value="desc" selected={order === 'desc'}>desc</option>
             </select>
