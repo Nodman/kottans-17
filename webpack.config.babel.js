@@ -9,13 +9,15 @@ const ENV = process.env.NODE_ENV || 'development';
 
 const CSS_MAPS = ENV!=='production';
 
+const PUBLIC_PATH = ENV === 'development' ? '/' : '/kottans-17'
+
 module.exports = {
 	context: path.resolve(__dirname, "src"),
 	entry: './index.js',
 
 	output: {
 		path: path.resolve(__dirname, "build"),
-		publicPath: '/',
+		publicPath: PUBLIC_PATH,
 		filename: 'bundle.js'
 	},
 
@@ -116,6 +118,9 @@ module.exports = {
 	},
 	plugins: ([
 		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.DefinePlugin({
+			PUBLIC_PATH
+    }),
 		new ExtractTextPlugin({
 			filename: 'style.css',
 			allChunks: true,

@@ -8,6 +8,7 @@
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack --progress",
     "prebuild": "mkdirp build",
+    "deploy": "npm run build && gh-pages --dist build --branch master",
     "test": "npm run -s lint && jest --coverage",
     "test:watch": "npm run -s test -- --watch",
     "lint": "eslint src test"

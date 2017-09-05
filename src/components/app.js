@@ -78,7 +78,7 @@ export default class App extends Component {
     if (busy || value === name && error) {
       return
     }
-    route(`/${value}`)
+    route(`${PUBLIC_PATH}/${value}`)
   }
 
   applyFilters = query => {
@@ -118,7 +118,7 @@ export default class App extends Component {
           <FilterSort languages={languages}/>
           <Router onChange={this.handleRouteChange}>
             <CardsList
-              path="/:name?"
+              path={`${PUBLIC_PATH}/:name?`}
               links={links}
               error={error}
               openErrorDialog={this.openErrorDialog}
