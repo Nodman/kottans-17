@@ -14,6 +14,8 @@ import {yeap, filtersActions, applySort, getLanguages} from '../utils/helpers'
 const ErrorDialog = Dialog('error')
 const RepoDialog = Dialog('repo')
 
+const PUBLIC_PATH = __DEV__ ? '/' : '/kottans-17'
+
 
 export default class App extends Component {
   state = {
@@ -78,7 +80,7 @@ export default class App extends Component {
     if (busy || value === name && error) {
       return
     }
-    route(`${PUBLIC_PATH}/${value}`)
+    route(`${PUBLIC_PATH}${value}`)
   }
 
   applyFilters = query => {
@@ -118,7 +120,7 @@ export default class App extends Component {
           <FilterSort languages={languages}/>
           <Router onChange={this.handleRouteChange}>
             <CardsList
-              path={`${PUBLIC_PATH}/:name?`}
+              path={`${PUBLIC_PATH}:name?`}
               links={links}
               error={error}
               openErrorDialog={this.openErrorDialog}

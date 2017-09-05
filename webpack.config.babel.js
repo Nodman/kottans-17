@@ -119,7 +119,8 @@ module.exports = {
 	plugins: ([
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.DefinePlugin({
-			PUBLIC_PATH
+      __DEV__: ENV === 'development',
+      __PROD__: ENV=== 'production'
     }),
 		new ExtractTextPlugin({
 			filename: 'style.css',
