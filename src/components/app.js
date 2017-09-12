@@ -80,7 +80,7 @@ export default class App extends Component {
     if (busy || value === name && error) {
       return
     }
-    route(`${PUBLIC_PATH}${value}`)
+    route(`${PUBLIC_PATH}${value}${location.search}`)
   }
 
   applyFilters = query => {

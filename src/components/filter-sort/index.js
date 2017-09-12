@@ -26,16 +26,20 @@ class FilterSort extends Component {
   }
 
   handleStarsInputChange = event => this.setState({starred_gt: event.target.value})
+
   handleStarsInputBlur = () => this.applyToRouter('starred_gt')
 
   handleChangeDate = event =>
     this.setState({updated_at: event.target.value}, () => this.applyToRouter('updated_at'))
+
   handleChangeLanguage = event =>
     this.setState({language: event.target.value}, () => this.applyToRouter('language'))
+
   handleChangeType = event =>
     this.setState({type: event.target.value}, () => this.applyToRouter('type'))
 
   handleChangeSort = event => this.setState({sort: event.target.value}, () => this.applyToRouter('sort'))
+
   handleChangeOrder = event => this.setState({order: event.target.value}, () => {
     this.applyToRouter('order')
     !this.state.sort && this.handleChangeSort({target: {value: 'name'}})
@@ -111,7 +115,7 @@ class FilterSort extends Component {
               onChange={this.handleChangeType}
               value="fork"
               checked={type === 'fork'}/>
-            <label htmlFor="type_source">Fork</label>
+            <label htmlFor="type_source">Source</label>
             <input
               type="radio"
               id="type_source"
