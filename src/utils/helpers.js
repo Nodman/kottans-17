@@ -37,4 +37,3 @@ export const applySort = (array, {sort, order}) => {
 
 export const getLanguages = reposData =>
   reposData.reduce((acc, {language}) => acc.includes(language) ? acc : [...acc, language], [])
-
